@@ -3,6 +3,7 @@
 "use client";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useState, useEffect } from "react";
+import { Link as ScrollLink } from "react-scroll"; // Import react-scroll
 import Image from "next/image";
 
 export default function Hero() {
@@ -75,24 +76,35 @@ export default function Hero() {
             I build scalable web applications using the MERN stack, focusing on efficient and optimized backend solutions.
           </motion.p>
 
-          {/* Buttons */}
+          {/* Buttons with Smooth Scrolling */}
           <div className="flex space-x-4">
-            <motion.a
-              href="#projects"
-              className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-full font-medium shadow-md"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              View My Work
-            </motion.a>
-            <motion.a
-              href="#contact"
-              className="border border-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-full font-medium shadow-md"
+              <ScrollLink
+                to="projects"
+                smooth={true}
+                duration={800}
+                className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-full font-medium shadow-md cursor-pointer"
+              >
+                View My Work
+              </ScrollLink>
+            </motion.div>
+
+            <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Contact Me
-            </motion.a>
+              <ScrollLink
+                to="contact"
+                smooth={true}
+                duration={800}
+                className="border border-white hover:bg-white hover:text-blue-600 px-6 py-3 rounded-full font-medium shadow-md cursor-pointer"
+              >
+                Contact Me
+              </ScrollLink>
+            </motion.div>
           </div>
         </motion.div>
 
