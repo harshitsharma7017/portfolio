@@ -55,19 +55,33 @@ export default function Projects() {
         <motion.h2 
           className="text-4xl font-extrabold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600"
           initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          viewport={{ once: false, amount: 0.2 }} // ✅ Triggers when 20% of the title is visible
         >
           My Projects
         </motion.h2>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
+          }}
+          viewport={{ once: false, amount: 0.2 }} // ✅ Animation repeats when section re-enters viewport
+        >
           {projects.map((project, index) => (
             <motion.div 
               key={index}
               className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
               onClick={() => setSelectedProject(project)}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0 },
+              }}
               whileHover={{ scale: 1.03 }}
             >
               {/* Project Image */}
@@ -88,7 +102,7 @@ export default function Projects() {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Modal Popup */}
         {selectedProject && (
@@ -123,7 +137,7 @@ export default function Projects() {
                 />
               </div>
 
-              {/* Modal Content (More compact) */}
+              {/* Modal Content */}
               <h3 className="text-xl font-semibold mb-2">{selectedProject.title}</h3>
               <p className="text-gray-600 mb-3">{selectedProject.techStack}</p>
               <p className="text-gray-700 mb-3">{selectedProject.description}</p>

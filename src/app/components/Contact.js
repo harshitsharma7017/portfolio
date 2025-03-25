@@ -12,8 +12,9 @@ export default function Contact() {
         <motion.h2 
           className="text-4xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-indigo-600 mb-12"
           initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
         >
           Contact Me
         </motion.h2>
@@ -22,12 +23,19 @@ export default function Contact() {
         <motion.div 
           className="max-w-xl mx-auto bg-white p-8 rounded-lg shadow-md"
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
         >
           <form className="space-y-6">
             {/* Name Field */}
-            <div className="relative">
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
               <label htmlFor="name" className="block text-gray-700 mb-2 font-medium">Name</label>
               <input 
                 type="text" 
@@ -37,10 +45,16 @@ export default function Contact() {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               />
-            </div>
+            </motion.div>
 
             {/* Email Field */}
-            <div className="relative">
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
               <label htmlFor="email" className="block text-gray-700 mb-2 font-medium">Email</label>
               <input 
                 type="email" 
@@ -50,10 +64,16 @@ export default function Contact() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
-            </div>
+            </motion.div>
 
             {/* Message Field */}
-            <div className="relative">
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.4 }}
+              viewport={{ once: true }}
+            >
               <label htmlFor="message" className="block text-gray-700 mb-2 font-medium">Message</label>
               <textarea 
                 id="message" 
@@ -63,7 +83,7 @@ export default function Contact() {
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               ></textarea>
-            </div>
+            </motion.div>
 
             {/* Submit Button */}
             <motion.button 
@@ -80,9 +100,10 @@ export default function Contact() {
         {/* Contact Information */}
         <motion.div 
           className="mt-12 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
         >
           <h3 className="text-xl font-semibold mb-4">Connect With Me</h3>
           <div className="flex flex-col space-y-3 items-center">
@@ -92,12 +113,11 @@ export default function Contact() {
               href="mailto:harshit.sharma8532@gmail.com"
               className="flex items-center space-x-3 text-blue-600 hover:text-blue-800 transition-transform"
               whileHover={{ scale: 1.1 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.5 }}
+              viewport={{ once: true }}
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
-                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
-              </svg>
-              <span>harshit.sharma8532@gmail.com</span>
+              📧 harshit.sharma8532@gmail.com
             </motion.a>
 
             {/* LinkedIn */}
@@ -107,22 +127,22 @@ export default function Contact() {
               rel="noopener noreferrer" 
               className="flex items-center space-x-3 text-blue-600 hover:text-blue-800 transition-transform"
               whileHover={{ scale: 1.1 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.6 }}
+              viewport={{ once: true }}
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M5.5 16.5a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 01-1 1h-2a1 1 0 01-1-1v-2zm6-11a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1h-2a1 1 0 01-1-1v-9zm6 5a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2a1 1 0 01-1-1v-4z"></path>
-              </svg>
-              <span>linkedin.com/in/harshit-sharma-462a762b5</span>
+              🔗 LinkedIn Profile
             </motion.a>
 
             {/* Location */}
             <motion.div 
               className="flex items-center space-x-3 text-gray-700"
               whileHover={{ scale: 1.1 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.7 }}
+              viewport={{ once: true }}
             >
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd"></path>
-              </svg>
-              <span>Shamli, India</span>
+              📍 Shamli, India
             </motion.div>
           </div>
         </motion.div>

@@ -10,8 +10,9 @@ export default function About() {
         <motion.h2 
           className="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600"
           initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          viewport={{ once: false, amount: 0.2 }} // ✅ Animation triggers when 20% of element is visible
         >
           About Me
         </motion.h2>
@@ -25,7 +26,7 @@ export default function About() {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }} // ✅ Keeps triggering when scrolling up/down
           >
             <h3 className="text-2xl font-semibold mb-4 text-blue-600">Who I Am</h3>
             <p className="text-gray-700 mb-4 leading-relaxed">
@@ -43,7 +44,7 @@ export default function About() {
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.2 }} // ✅ Repeats animation on scroll
           >
             <h3 className="text-2xl font-semibold mb-4 text-blue-600">Education</h3>
             <div className="mb-6 border-l-4 border-blue-500 pl-4">

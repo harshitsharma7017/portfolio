@@ -10,8 +10,9 @@ export default function Experience() {
         <motion.h2 
           className="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600"
           initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          viewport={{ once: false, amount: 0.2 }} // ✅ Animation triggers when 20% of the title is visible
         >
           Work Experience
         </motion.h2>
@@ -22,7 +23,7 @@ export default function Experience() {
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.2 }} // ✅ Triggers animation every time it enters viewport
         >
           {/* Title & Date */}
           <div className="flex flex-col md:flex-row justify-between mb-4">
@@ -40,34 +41,27 @@ export default function Experience() {
 
           {/* Responsibilities List */}
           <ul className="list-none space-y-3">
-            <li className="flex items-start space-x-2">
-              <span className="text-blue-500">✔</span>
-              <span>Developed and optimized <span className="font-medium text-blue-600">RESTful APIs</span> using <span className="font-medium text-blue-600">Node.js</span> and <span className="font-medium text-blue-600">Express.js</span>.</span>
-            </li>
-            <li className="flex items-start space-x-2">
-              <span className="text-blue-500">✔</span>
-              <span>Integrated <span className="font-medium text-blue-600">MongoDB</span> for efficient data storage and retrieval.</span>
-            </li>
-            <li className="flex items-start space-x-2">
-              <span className="text-blue-500">✔</span>
-              <span>Designed and implemented <span className="font-medium text-blue-600">JWT-based authentication</span> and role-based access control.</span>
-            </li>
-            <li className="flex items-start space-x-2">
-              <span className="text-blue-500">✔</span>
-              <span>Collaborated with frontend developers to ensure seamless API integration with <span className="font-medium text-blue-600">React.js</span>.</span>
-            </li>
-            <li className="flex items-start space-x-2">
-              <span className="text-blue-500">✔</span>
-              <span>Implemented background job processing using <span className="font-medium text-blue-600">BullMQ</span> for handling async tasks efficiently.</span>
-            </li>
-            <li className="flex items-start space-x-2">
-              <span className="text-blue-500">✔</span>
-              <span>Optimized database queries, improving API response times by <span className="font-medium text-blue-600">30%</span>.</span>
-            </li>
-            <li className="flex items-start space-x-2">
-              <span className="text-blue-500">✔</span>
-              <span>Monitored and debugged application performance using <span className="font-medium text-blue-600">Postman</span>, <span className="font-medium text-blue-600">Jest</span>, and <span className="font-medium text-blue-600">New Relic</span>.</span>
-            </li>
+            {[
+              "Developed and optimized RESTful APIs using Node.js and Express.js.",
+              "Integrated MongoDB for efficient data storage and retrieval.",
+              "Designed and implemented JWT-based authentication and role-based access control.",
+              "Collaborated with frontend developers to ensure seamless API integration with React.js.",
+              "Implemented background job processing using BullMQ for handling async tasks efficiently.",
+              "Optimized database queries, improving API response times by 30%.",
+              "Monitored and debugged application performance using Postman, Jest, and New Relic."
+            ].map((task, index) => (
+              <motion.li 
+                key={index} 
+                className="flex items-start space-x-2"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }} // ✅ Adds stagger effect to list items
+                viewport={{ once: false, amount: 0.2 }}
+              >
+                <span className="text-blue-500">✔</span>
+                <span className="text-gray-700">{task}</span>
+              </motion.li>
+            ))}
           </ul>
         </motion.div>
 
