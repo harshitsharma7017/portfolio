@@ -19,31 +19,26 @@ export default function Experience() {
   const [languageData, setLanguageData] = useState([]);
 
   useEffect(() => {
-    // Fetch Contributions (Bar Chart)
     fetch("https://github-contributions-api.deno.dev/harshitsharma7017.json")
       .then((res) => res.json())
       .then((data) => {
         if (data && data.contributions) {
-          const flattenedContributions = data.contributions.flat(); // Flatten weekly contributions
-          const monthlyContributions = flattenedContributions.reduce(
-            (acc, { date, contributionCount }) => {
-              const month = date.slice(0, 7); // Extract YYYY-MM format
-              const existingMonth = acc.find((m) => m.month === month);
-              if (existingMonth) {
-                existingMonth.count += contributionCount;
-              } else {
-                acc.push({ month, count: contributionCount });
-              }
-              return acc;
-            },
-            []
-          );
-          setContributionData(monthlyContributions);
+          const flattened = data.contributions.flat();
+          const monthly = flattened.reduce((acc, { date, contributionCount }) => {
+            const month = date.slice(0, 7);
+            const existing = acc.find((m) => m.month === month);
+            if (existing) {
+              existing.count += contributionCount;
+            } else {
+              acc.push({ month, count: contributionCount });
+            }
+            return acc;
+          }, []);
+          setContributionData(monthly);
         }
       })
       .catch((error) => console.error("Error fetching contributions:", error));
 
-    // Static Language Data for Pie Chart
     const skills = [
       { name: "Node.js", category: "backend", logo: "/logos/nodejs.png" },
       { name: "Express.js", category: "backend", logo: "/logos/express.png" },
@@ -61,14 +56,14 @@ export default function Experience() {
       { name: "Solidity", category: "blockchain", logo: "/logos/solidity.png" },
     ];
 
-    const languageCounts = skills.reduce((acc, { name, category }) => {
-      if (category === "language" || category === "frontend" || category === "backend" || category === "blockchain") {
+    const langCount = skills.reduce((acc, { name, category }) => {
+      if (["language", "frontend", "backend", "blockchain"].includes(category)) {
         acc[name] = (acc[name] || 0) + 1;
       }
       return acc;
     }, {});
 
-    const pieData = Object.entries(languageCounts).map(([lang, count]) => ({
+    const pieData = Object.entries(langCount).map(([lang, count]) => ({
       name: lang,
       value: count,
     }));
@@ -94,7 +89,7 @@ export default function Experience() {
 
         {/* Experience Card */}
         <motion.div
-          className="max-w-3xl mx-auto bg-white/80 backdrop-blur-lg rounded-xl shadow-lg p-8 border border-gray-200 transition-all duration-300 hover:shadow-xl mb-12"
+          className="max-w-3xl mx-auto bg-white/80 backdrop-blur-lg rounded-xl shadow-lg p-8 border border-gray-200 transition-transform hover:scale-[1.015] duration-300 hover:shadow-2xl mb-12"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
@@ -106,7 +101,6 @@ export default function Experience() {
           </div>
 
           <p className="text-lg font-medium text-gray-900 mb-2">Dehix</p>
-
           <p className="text-gray-600 mb-4">
             Dehix specializes in web application development, focusing on scalable solutions and modern technologies.
           </p>
@@ -119,11 +113,11 @@ export default function Experience() {
               "Collaborated with frontend developers to ensure seamless API integration with React.js.",
               "Implemented background job processing using BullMQ for handling async tasks efficiently.",
               "Optimized database queries, improving API response times by 30%.",
-              "Monitored and debugged application performance using Postman, Jest, and New Relic."
+              "Monitored and debugged application performance using Postman, Jest, and New Relic.",
             ].map((task, index) => (
-              <motion.li 
-                key={index} 
-                className="flex items-start space-x-2"
+              <motion.li
+                key={index}
+                className="flex items-start space-x-2 cursor-pointer hover:scale-[1.01] transition-transform duration-200"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -138,7 +132,7 @@ export default function Experience() {
 
         {/* GitHub Contributions Calendar */}
         <motion.div
-          className="max-w-4xl mx-auto bg-white/70 backdrop-blur-md rounded-xl shadow-lg p-6 border border-gray-200 mb-12"
+          className="max-w-4xl mx-auto bg-white/70 backdrop-blur-md rounded-xl shadow-lg p-6 border border-gray-200 mb-12 hover:shadow-2xl transition-shadow duration-300"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
@@ -166,8 +160,12 @@ export default function Experience() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true, amount: 0.2 }}
         >
-          {/* Bar Chart - Monthly Contributions */}
-          <div className="bg-white p-6 rounded-xl shadow border border-gray-200">
+          {/* Bar Chart */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="bg-white p-6 rounded-xl shadow hover:shadow-xl transition-shadow duration-300 border border-gray-200"
+          >
             <h4 className="text-lg font-semibold text-center text-blue-600 mb-4">
               Monthly Contributions
             </h4>
@@ -195,22 +193,38 @@ export default function Experience() {
                 <Bar dataKey="count" fill="url(#barGradient)" radius={[8, 8, 0, 0]} animationDuration={800} />
               </BarChart>
             </ResponsiveContainer>
-          </div>
+          </motion.div>
 
-          {/* Pie Chart - Languages */}
-          <div className="bg-white p-6 rounded-xl shadow border border-gray-200">
+          {/* Pie Chart */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+            className="bg-white p-6 rounded-xl shadow hover:shadow-xl transition-shadow duration-300 border border-gray-200"
+          >
             <h4 className="text-lg font-semibold text-center text-indigo-600 mb-2">Languages Used</h4>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
-                <Pie data={languageData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100}>
+                <Pie
+                  data={languageData}
+                  dataKey="value"
+                  nameKey="name"
+                  cx="50%"
+                  cy="50%"
+                  outerRadius={100}
+                  isAnimationActive
+                >
                   {languageData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={chartColors[index % chartColors.length]} />
+                    <Cell
+                      key={`cell-${index}`}
+                      fill={chartColors[index % chartColors.length]}
+                      style={{ transition: "fill 0.3s ease-in-out" }}
+                    />
                   ))}
                 </Pie>
                 <Tooltip />
               </PieChart>
             </ResponsiveContainer>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
