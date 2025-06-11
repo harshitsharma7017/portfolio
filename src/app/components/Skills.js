@@ -21,11 +21,18 @@ export default function Skills() {
   ];
 
   return (
-    <section id="skills" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section id="skills" className="py-20 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-teal-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 right-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+        <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Title with Animation */}
         <motion.h2
-          className="text-3xl font-bold text-center mb-12 text-gray-800"
+          className="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -51,22 +58,29 @@ export default function Skills() {
           {skills.map((skill, index) => (
             <motion.div
               key={index}
-              className="flex flex-col items-center bg-white px-6 py-4 rounded-lg shadow-md border border-gray-200 transition-transform transform hover:-translate-y-2 hover:shadow-lg"
+              className="flex flex-col items-center bg-slate-800/50 backdrop-blur-lg px-6 py-6 rounded-2xl shadow-2xl border border-emerald-500/20 hover:border-emerald-500/50 transition-all duration-300 hover:shadow-emerald-500/10 group"
               variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
               }}
+              whileHover={{ scale: 1.05, y: -8 }}
+              whileTap={{ scale: 0.95 }}
             >
-              <div className="w-14 h-14">
+              <div className="w-16 h-16 mb-3 transition-transform duration-300 group-hover:scale-110">
                 <Image
                   src={skill.logo}
                   alt={`${skill.name} logo`}
-                  width={56}
-                  height={56}
-                  className="object-contain"
+                  width={64}
+                  height={64}
+                  className="object-contain filter drop-shadow-lg"
                 />
               </div>
-              <span className="mt-2 font-medium text-gray-700">{skill.name}</span>
+              <span className="font-medium text-gray-300 group-hover:text-emerald-400 transition-colors duration-300 text-center">
+                {skill.name}
+              </span>
+              
+              {/* Glowing effect on hover */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-emerald-500/5 to-teal-500/5"></div>
             </motion.div>
           ))}
         </motion.div>
