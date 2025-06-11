@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import GitHubCalendar from "react-github-calendar";
 import {
@@ -73,12 +73,11 @@ export default function Experience() {
   const chartColors = ["#6366f1", "#4f46e5", "#3b82f6", "#0ea5e9", "#14b8a6", "#fbbf24", "#7f1d1d"];
 
   return (
-    <section id="experience" className="py-20 bg-gradient-to-b from-gray-50 to-white">
+    <section id="experience" className="py-20 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
       <div className="container mx-auto px-6">
-
         {/* Section Title */}
         <motion.h2
-          className="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-indigo-600"
+          className="text-4xl font-extrabold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400"
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -89,19 +88,19 @@ export default function Experience() {
 
         {/* Experience Card */}
         <motion.div
-          className="max-w-3xl mx-auto bg-white/80 backdrop-blur-lg rounded-xl shadow-lg p-8 border border-gray-200 transition-transform hover:scale-[1.015] duration-300 hover:shadow-2xl mb-12"
+          className="max-w-3xl mx-auto bg-slate-800/50 backdrop-blur-lg rounded-xl shadow-xl p-8 border border-emerald-500/20 transition-transform hover:scale-[1.015] duration-300 hover:shadow-2xl hover:shadow-emerald-500/10 mb-12"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: false, amount: 0.2 }}
         >
           <div className="flex flex-col md:flex-row justify-between mb-4">
-            <h3 className="text-xl font-semibold text-blue-600">Junior Backend Developer</h3>
-            <p className="text-gray-500">August 2024 - Present</p>
+            <h3 className="text-xl font-semibold text-emerald-400">Junior Backend Developer</h3>
+            <p className="text-slate-400">August 2024 - Present</p>
           </div>
 
-          <p className="text-lg font-medium text-gray-900 mb-2">Dehix</p>
-          <p className="text-gray-600 mb-4">
+          <p className="text-lg font-medium text-white mb-2">Dehix</p>
+          <p className="text-slate-300 mb-4">
             Dehix specializes in web application development, focusing on scalable solutions and modern technologies.
           </p>
 
@@ -123,8 +122,8 @@ export default function Experience() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: false, amount: 0.2 }}
               >
-                <span className="text-blue-500">✔</span>
-                <span className="text-gray-700">{task}</span>
+                <span className="text-emerald-400">✔</span>
+                <span className="text-slate-300">{task}</span>
               </motion.li>
             ))}
           </ul>
@@ -132,13 +131,13 @@ export default function Experience() {
 
         {/* GitHub Contributions Calendar */}
         <motion.div
-          className="max-w-4xl mx-auto bg-white/70 backdrop-blur-md rounded-xl shadow-lg p-6 border border-gray-200 mb-12 hover:shadow-2xl transition-shadow duration-300"
+          className="max-w-4xl mx-auto bg-slate-800/50 backdrop-blur-md rounded-xl shadow-xl p-6 border border-emerald-500/20 mb-12 hover:shadow-2xl hover:shadow-emerald-500/10 transition-shadow duration-300"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           viewport={{ once: false, amount: 0.2 }}
         >
-          <h3 className="text-2xl font-semibold text-center text-indigo-600 mb-4">
+          <h3 className="text-2xl font-semibold text-center text-emerald-400 mb-4">
             GitHub Contributions
           </h3>
           <div className="flex justify-center overflow-x-auto">
@@ -146,7 +145,7 @@ export default function Experience() {
               username="harshitsharma7017"
               blockSize={15}
               blockMargin={5}
-              colorScheme="light"
+              colorScheme="dark"
               fontSize={14}
             />
           </div>
@@ -164,9 +163,9 @@ export default function Experience() {
           <motion.div
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="bg-white p-6 rounded-xl shadow hover:shadow-xl transition-shadow duration-300 border border-gray-200"
+            className="bg-slate-800/50 p-6 rounded-xl shadow-xl hover:shadow-2xl hover:shadow-emerald-500/10 transition-shadow duration-300 border border-emerald-500/20 backdrop-blur-sm"
           >
-            <h4 className="text-lg font-semibold text-center text-blue-600 mb-4">
+            <h4 className="text-lg font-semibold text-center text-emerald-400 mb-4">
               Monthly Contributions
             </h4>
             <ResponsiveContainer width="100%" height={300}>
@@ -199,9 +198,9 @@ export default function Experience() {
           <motion.div
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 200, damping: 15 }}
-            className="bg-white p-6 rounded-xl shadow hover:shadow-xl transition-shadow duration-300 border border-gray-200"
+            className="bg-slate-800/50 p-6 rounded-xl shadow-xl hover:shadow-2xl hover:shadow-emerald-500/10 transition-shadow duration-300 border border-emerald-500/20 backdrop-blur-sm"
           >
-            <h4 className="text-lg font-semibold text-center text-indigo-600 mb-2">Languages Used</h4>
+            <h4 className="text-lg font-semibold text-center text-emerald-400 mb-2">Languages Used</h4>
             <ResponsiveContainer width="100%" height={300}>
               <PieChart>
                 <Pie
