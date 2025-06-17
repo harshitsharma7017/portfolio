@@ -191,7 +191,7 @@ export default function Experience() {
           viewport={{ once: true, amount: 0.2 }}
         >
           <div className="flex flex-col md:flex-row justify-between mb-4">
-            <h3 className="text-xl font-semibold text-emerald-400">Junior Backend Developer</h3>
+            <h3 className="text-xl font-semibold text-emerald-400">Full Stack Developer</h3>
             <p className="text-slate-400">August 2024 - Present</p>
           </div>
 

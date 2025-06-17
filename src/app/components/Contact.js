@@ -215,26 +215,42 @@ export default function ContactForm() {
     }
   }, [errors]);
 
-  // Optimized submit handler
-  const handleSubmit = useCallback(async () => {
-    const validationErrors = validateForm(formData);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    setIsSubmitting(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1200));
+  const errors = validateForm(formData);
+  if (Object.keys(errors).length > 0) {
+    setErrors(errors);
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+    const res = await fetch('http://localhost:5000/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      setIsSubmitted(true);
+    } else {
+      alert(data.message || 'Something went wrong');
+    }
+  } catch (error) {
+    console.error('Error sending message:', error);
+    alert('An error occurred. Please try again later.');
+  } finally {
     setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Auto-reset after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 3000);
-  }, [formData]);
+  }
+};
+
+
 
   const resetForm = useCallback(() => {
     setIsSubmitted(false);
@@ -309,53 +325,56 @@ export default function ContactForm() {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  <FormInput
-                    label="Name"
-                    id="name"
-                    placeholder="Your full name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    error={errors.name}
-                  />
+                  <form onSubmit={handleSubmit} className="space-y-4">
+  <FormInput
+    label="Name"
+    id="name"
+    placeholder="Your full name"
+    value={formData.name}
+    onChange={handleInputChange}
+    error={errors.name}
+  />
 
-                  <FormInput
-                    label="Email"
-                    id="email"
-                    type="email"
-                    placeholder="your.email@example.com"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    error={errors.email}
-                  />
+  <FormInput
+    label="Email"
+    id="email"
+    type="email"
+    placeholder="your.email@example.com"
+    value={formData.email}
+    onChange={handleInputChange}
+    error={errors.email}
+  />
 
-                  <FormInput
-                    label="Message"
-                    id="message"
-                    placeholder="Tell me about your project..."
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    error={errors.message}
-                    isTextarea={true}
-                  />
+  <FormInput
+    label="Message"
+    id="message"
+    placeholder="Tell me about your project..."
+    value={formData.message}
+    onChange={handleInputChange}
+    error={errors.message}
+    isTextarea={true}
+  />
 
-                  <button
-                    onClick={handleSubmit}
-                    disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-medium rounded-lg hover:from-emerald-600 hover:to-emerald-700 transition-all disabled:opacity-50"
-                  >
-                    {isSubmitting ? (
-                      <div className="flex items-center justify-center space-x-2">
-                        <motion.div
-                          className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        />
-                        <span>Sending...</span>
-                      </div>
-                    ) : (
-                      'Send Message'
-                    )}
-                  </button>
+  <button
+    type="submit"
+    disabled={isSubmitting}
+    className="w-full px-4 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-medium rounded-lg hover:from-emerald-600 hover:to-emerald-700 transition-all disabled:opacity-50"
+  >
+    {isSubmitting ? (
+      <div className="flex items-center justify-center space-x-2">
+        <motion.div
+          className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+        />
+        <span>Sending...</span>
+      </div>
+    ) : (
+      'Send Message'
+    )}
+  </button>
+</form>
+
                 </div>
               )}
             </motion.div>
