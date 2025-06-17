@@ -96,6 +96,8 @@ const FormInput = memo(({
   );
 });
 
+FormInput.displayName = 'FormInput';
+
 // Simplified contact item
 const ContactItem = memo(({ href, icon, label, delay = 0 }) => (
   <motion.a
@@ -115,6 +117,8 @@ const ContactItem = memo(({ href, icon, label, delay = 0 }) => (
     <span>{label}</span>
   </motion.a>
 ));
+
+ContactItem.displayName = 'ContactItem';
 
 // Optimized background with fewer elements
 const BackgroundElements = memo(() => (
@@ -144,6 +148,8 @@ const BackgroundElements = memo(() => (
   </div>
 ));
 
+BackgroundElements.displayName = 'BackgroundElements';
+
 // Optimized success message
 const SuccessMessage = memo(() => (
   <motion.div
@@ -157,9 +163,11 @@ const SuccessMessage = memo(() => (
       </svg>
     </div>
     <h3 className="text-lg font-semibold text-white mb-2">Message Sent!</h3>
-    <p className="text-slate-300 text-sm">I'll get back to you soon!</p>
+    <p className="text-slate-300 text-sm">I&apos;ll get back to you soon!</p>
   </motion.div>
 ));
+
+SuccessMessage.displayName = 'SuccessMessage';
 
 // Optimized icons as components to avoid inline SVGs
 const EmailIcon = () => (
@@ -259,7 +267,7 @@ export default function ContactForm() {
               Get In <span className="text-emerald-400">Touch</span>
             </h1>
             <p className="text-slate-300 max-w-xl mx-auto">
-              Have a project in mind? Let's collaborate and bring your ideas to life.
+              Have a project in mind? Let&apos;s collaborate and bring your ideas to life.
             </p>
           </motion.div>
 
@@ -276,10 +284,10 @@ export default function ContactForm() {
               </div>
 
               <div className="bg-slate-800/30 backdrop-blur-sm p-5 rounded-lg border border-slate-700/50">
-                <h3 className="text-lg font-semibold text-white mb-2">Let's Collaborate</h3>
+                <h3 className="text-lg font-semibold text-white mb-2">Let&apos;s Collaborate</h3>
                 <p className="text-slate-300 text-sm leading-relaxed">
-                  I'm always excited to work on new projects. Whether you have a specific 
-                  project in mind or just want to chat, I'd love to hear from you.
+                  I&apos;m always excited to work on new projects. Whether you have a specific 
+                  project in mind or just want to chat, I&apos;d love to hear from you.
                 </p>
               </div>
             </motion.div>
