@@ -244,10 +244,10 @@ export default function ContactForm() {
 
   // Memoized contact items to prevent re-renders
   const contactItems = useMemo(() => [
-    { href: "mailto:hello@example.com", icon: <EmailIcon />, label: "hello@example.com", delay: 0.1 },
-    { href: "tel:+1234567890", icon: <PhoneIcon />, label: "+1 (234) 567-890", delay: 0.15 },
-    { href: null, icon: <LocationIcon />, label: "San Francisco, CA", delay: 0.2 },
-    { href: "https://linkedin.com/in/yourprofile", icon: <LinkedInIcon />, label: "LinkedIn", delay: 0.25 }
+    { href: "mailto:harshit.sharma8532@gmail.com", icon: <EmailIcon />, label: "harshit.sharma8532@gmail.com", delay: 0.1 },
+    { href: "tel:+91 7017855982", icon: <PhoneIcon />, label: "+91 7017855982", delay: 0.15 },
+    { href: null, icon: <LocationIcon />, label: "Shamli, UP", delay: 0.2 },
+    { href: "https://linkedin.com/in/harshit-sharma-462a762b5", icon: <LinkedInIcon />, label: "LinkedIn", delay: 0.25 }
   ], []);
 
   return (
